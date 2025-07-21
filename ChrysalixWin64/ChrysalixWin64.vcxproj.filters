@@ -108,7 +108,7 @@
     </ResourceCompile>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="..\crysalix64.ico">
+    <Image Include="crysalix64.ico">
       <Filter>Файлы ресурсов</Filter>
     </Image>
   </ItemGroup>

@@ -166,7 +166,7 @@
     <ResourceCompile Include="ChrysalixWin64.rc" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="..\crysalix64.ico" />
+    <Image Include="crysalix64.ico" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
