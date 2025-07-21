@@ -1,12 +1,11 @@
-#pragma once
-
-#include <iostream>
+п»ї#include <iostream>
 
 #include "Helpers.h"
+#include "LangLib.h"
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // getValue 
-// Возвращает значение параметра по имени переменной или литералу
+// Р’РѕР·РІСЂР°С‰Р°РµС‚ Р·РЅР°С‡РµРЅРёРµ РїР°СЂР°РјРµС‚СЂР° РїРѕ РёРјРµРЅРё РїРµСЂРµРјРµРЅРЅРѕР№ РёР»Рё Р»РёС‚РµСЂР°Р»Сѓ
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 Var getValue(Var* val,std::map<std::wstring, Var>* heap) {
 	if ((*val).type == STR && (*val).getWStr()[0] == L'$') {
@@ -15,7 +14,7 @@ Var getValue(Var* val,std::map<std::wstring, Var>* heap) {
 		}
 		catch (std::out_of_range& ex) {
 			std::string temp = ex.what();
-			throw std::wstring{ L"Переменная " + (*val).getWStr() + L" не определена\n" };
+			throw std::wstring{ (*val).getWStr() + LangLib::getTrans(L": РџРµСЂРµРјРµРЅРЅР°СЏ РЅРµ РѕРїСЂРµРґРµР»РµРЅР°\n") };
 		}
 	}
 	else {
@@ -25,7 +24,7 @@ Var getValue(Var* val,std::map<std::wstring, Var>* heap) {
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // getLabel
-// Возвращает значение параметра по имени переменной или литералу
+// Р’РѕР·РІСЂР°С‰Р°РµС‚ Р·РЅР°С‡РµРЅРёРµ РїР°СЂР°РјРµС‚СЂР° РїРѕ РёРјРµРЅРё РїРµСЂРµРјРµРЅРЅРѕР№ РёР»Рё Р»РёС‚РµСЂР°Р»Сѓ
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 Var getLabel(Var* val,std::map<std::wstring, int>* pointers) {
 	if ((*val).type == STR && (*val).getWStr()[0] == L'&') {
@@ -34,7 +33,7 @@ Var getLabel(Var* val,std::map<std::wstring, int>* pointers) {
 		}
 		catch (std::out_of_range& ex) {
 			std::string temp = ex.what();
-			throw std::wstring{ L"Метка " + (*val).getWStr() + L" не определена\n" };
+			throw std::wstring{ (*val).getWStr() + LangLib::getTrans(L": РњРµС‚РєР° РЅРµ РѕРїСЂРµРґРµР»РµРЅР°\n") };
 		}
 	}
 	else {

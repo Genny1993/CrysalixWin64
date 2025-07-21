@@ -55,4 +55,4 @@ void requiredLabel(Var* val, Machine* m, std::wstring* type, std::wstring num);
 
 //Хелперы кодировки
 std::wstring loadFile(std::wstring filename);
-void Unicode();
+int Unicode();

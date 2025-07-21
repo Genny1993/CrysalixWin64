@@ -1,7 +1,5 @@
-#pragma once
-
+ο»Ώ#pragma once
 #define _SILENCE_CXX17_CODECVT_HEADER_DEPRECATION_WARNING 1
-
 #include <sstream>
 #include <fstream>
 #include <codecvt>
@@ -9,6 +7,7 @@
 #include <fcntl.h>
 
 #include "Helpers.h"
+#include "LangLib.h"
 
 std::wstring loadFile(std::wstring filename) {
     std::wstring file_content = L"";
@@ -21,15 +20,16 @@ std::wstring loadFile(std::wstring filename) {
         file_content = wss.str();
     }
     else {
-        throw std::wstring{ L"Τΰιλ " + filename + L" νε νΰιδεν\n" };
+        throw std::wstring{ filename + LangLib::getTrans(L": Π¤Π°ΠΉΠ» Π½Πµ Π½Π°ΠΉΠ΄ΠµΠ½\n") };
     }
     infile.close();
 
     return file_content;
 }
 
-void Unicode() {
+int Unicode() {
     int result = _setmode(_fileno(stdout), _O_U16TEXT);
     result = _setmode(_fileno(stdin), _O_U16TEXT);
     result = _setmode(_fileno(stderr), _O_U16TEXT);
+    return result;
 }

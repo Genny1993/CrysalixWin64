@@ -1,6 +1,4 @@
-﻿#pragma once
-
-#include <iostream>
+﻿#include <iostream>
 #include <io.h>
 #include <sstream>
 #include <fstream>
@@ -12,10 +10,13 @@
 #include "Machine.h"
 #include "Parser.h"
 #include "Helpers.h"
+#include "LangLib.h"
 
 int main(int argc, char* argv[])
 {
-    
+    //Установка локализации интерпретатора
+    LangLib::setLang(LANGUAGES::EN);
+
     std::wstring filename = L"";
     if (argc < 2) {
         //Если не передан параметр при запуске, смотрим файл настроек
@@ -24,7 +25,7 @@ int main(int argc, char* argv[])
         }
         catch (const std::wstring& error_message) {
             std::wstring temp = error_message;
-            std::wcout << L"0.1 alpha";
+            std::wcout << L"0.2.1 alpha";
             return 0;
         }
     }
@@ -52,7 +53,7 @@ int main(int argc, char* argv[])
         p.parse(mchn);
         auto end = std::chrono::high_resolution_clock::now();
         auto elapsed_ms = std::chrono::duration_cast<std::chrono::microseconds>(end - begin);
-        std::wcout << L"Время обработки исходного кода: " << std::to_wstring((double)elapsed_ms.count() / 1000000.0) << L"sec\n";
+        std::wcout << LangLib::getTrans(L"Время обработки исходного кода: ") << std::to_wstring((double)elapsed_ms.count() / 1000000.0) << L" sec\n";
 
         //Выполняем код
         begin = std::chrono::high_resolution_clock::now();
@@ -60,7 +61,7 @@ int main(int argc, char* argv[])
         mchn.go();
         end = std::chrono::high_resolution_clock::now();
         elapsed_ms = std::chrono::duration_cast<std::chrono::microseconds>(end - begin);
-        std::wcout << L"Время выполнения: " << std::to_wstring((double)elapsed_ms.count() / 1000000.0) << L"sec\n";
+        std::wcout << LangLib::getTrans(L"Время выполнения кода: ") << std::to_wstring((double)elapsed_ms.count() / 1000000.0) << L" sec\n";
     }
     catch (const std::wstring& error_message) {
         std::wcout << std::endl << error_message << std::endl;

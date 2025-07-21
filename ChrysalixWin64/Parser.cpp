@@ -1,9 +1,9 @@
-﻿#pragma once
-#include <iostream>
+﻿#include <iostream>
 
 #include "Parser.h"
 #include "CTable.h"
 #include "Helpers.h"
+#include "LangLib.h"
 
 void Parser::fileLoad(std::wstring file_name) {
     //Чтение файла в кодировке UTF-8
@@ -121,8 +121,6 @@ void Parser::parse(Machine& m) {
                         else {
                             //Парсим параметры инструкции. Если у нас запятая, параметр кончился.
                             if (c == ',') {
-                                //str.erase(0, str.find_first_not_of(L" \n\r\t"));
-                                //str.erase(str.find_last_not_of(L" \n\r\t") + 1);
                                 if (str != L"") {
                                     instruction.str_parameters.push_back(str);
                                     str = L"";
@@ -130,8 +128,6 @@ void Parser::parse(Machine& m) {
                             }
                             //если точка с запятой, инструкция вообще кончилась
                             else if (c == ';') {
-                                //str.erase(0, str.find_first_not_of(L" \n\r\t"));
-                                //str.erase(str.find_last_not_of(L" \n\r\t") + 1);
                                 if (str != L"") {
                                     instruction.str_parameters.push_back(str);
                                     str = L"";
@@ -276,13 +272,13 @@ void Parser::parse(Machine& m) {
                     }
                 }
                 else {
-                    throw std::wstring{temp + L": Неизвестный литерал"};
+                    throw std::wstring{temp + LangLib::getTrans(L": Неизвестный литерал\n")};
 
                 }
             }
         }
         catch (const std::wstring& error_message) {
-            throw std::wstring{ L"Синтаксическая ошибка в инструкции " + std::to_wstring(i + 1) + L": " + error_message };
+            throw std::wstring{ LangLib::getTrans(L"Синтаксическая ошибка в инструкции ") + std::to_wstring(i + 1) + LangLib::getTrans(L": ") + error_message + LangLib::getTrans(L"\n")};
         }
     }
     
@@ -299,7 +295,7 @@ void Parser::parse(Machine& m) {
         }
         catch (std::out_of_range& ex) {
             std::string temp = ex.what();
-            throw std::wstring{ L"Синтаксическая ошибка в инструкции " + std::to_wstring(i) + L": " + lexeme.type + L": Неизвестная инструкция\n" };
+            throw std::wstring{ LangLib::getTrans(L"Синтаксическая ошибка в инструкции ") + std::to_wstring(i) + LangLib::getTrans(L": ") + lexeme.type + LangLib::getTrans(L": Неизвестная инструкция\n") };
         }
 
         inst.parameters = lexeme.parameters;

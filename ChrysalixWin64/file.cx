@@ -1,9 +1,10 @@
+
 	vtoarr: $a1, 1, 2, 1;
 	vtoarr: $a2, 3, 2, 1, $a1;
 	vtoarr: $a3, $a2, 1, 4, 2;
 	var: $path, nil;
 	var: $type, 'strict';
-	rinall: $type, $path, $a3, $a1;
+	rinall: $type, $path, $a3, 4;
 	print: $a3, '\n';
 	print: 'Путь до значения 2: ', $path, '\n';
 
@@ -24,7 +25,7 @@ label: &main_loop;
 		calc: 'inc', $i;
 		comp: '<=', $1, $i, $n; 
 	jif: $1, &cycle_start;
-	forget: ntg 1;	
+	forget: ntg 1;
 
 	#print: 'Факториал ', $n, ' равен ', $result, '\n';
 	

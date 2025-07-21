@@ -1,8 +1,7 @@
-﻿#pragma once
-
-#include <iostream>
+﻿#include <iostream>
 
 #include "Helpers.h"
+#include "LangLib.h"
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // checkExistValue
@@ -11,7 +10,7 @@
 void checkExistValue(Var* val, Machine* m) {
 	if ((*val).type == STR && (*val).getWStr()[0] == L'$') {
 		if ((*m).heap.find((*val).getWStr()) != (*m).heap.end()) {
-			throw std::wstring{ L"Переменная " + (*val).getWStr() + L" уже определена\n" };
+			throw std::wstring{ (*val).getWStr() + LangLib::getTrans(L": Переменная уже определена\n") };
 		}
 	}
 }
@@ -23,7 +22,7 @@ void checkExistValue(Var* val, Machine* m) {
 void checkNotExistValue(Var* val, Machine* m) {
 	if ((*val).type == STR && (*val).getWStr()[0] == L'$') {
 		if ((*m).heap.find((*val).getWStr()) == (*m).heap.end()) {
-			throw std::wstring{ L"Переменная " + (*val).getWStr() + L" не определена\n" };
+			throw std::wstring{ (*val).getWStr() + LangLib::getTrans(L": Переменная не определена\n") };
 		}
 	}
 }
@@ -35,7 +34,7 @@ void checkNotExistValue(Var* val, Machine* m) {
 void checkExistLabel(Var* val, Machine* m) {
 	if ((*val).type == STR && (*val).getWStr()[0] == L'&') {
 		if ((*m).jmp_pointers.find((*val).getWStr()) != (*m).jmp_pointers.end()) {
-			throw std::wstring{ L"Метка " + (*val).getWStr() + L" уже определена\n" };
+			throw std::wstring{(*val).getWStr() + LangLib::getTrans(L": Метка уже определена\n") };
 		}
 	}
 }
@@ -48,21 +47,22 @@ void checkParameterCount(unsigned char type, int count, Machine* m, std::wstring
 	switch (type) {
 	case STRICTED:
 		if (count != stricted) {
-			throw std::wstring{ L"Инструкция " + *name + L" принимает " + std::to_wstring(stricted) + L" параметр(а)(ов)\n" };
+			throw std::wstring{ *name + LangLib::getTrans(L": Инструкция принимает ") + std::to_wstring(stricted) + LangLib::getTrans(L" параметр(а)(ов)\n")};
 		}
 		break;
 	case MIN:
 		if (count < min) {
-			throw std::wstring{ L"Инструкция " + *name + L" принимает не меньше " + std::to_wstring(min) + L" параметра(ов)\n" };
+			throw std::wstring{ *name + LangLib::getTrans(L": Инструкция принимает не менее ") + std::to_wstring(min) + LangLib::getTrans(L" параметр(а)(ов)\n") };
 		}
 		break;
 	case RANGE:
 		if (count < range[0] || count > range[1]) {
-			throw std::wstring{ L"Инструкция " + *name + L" принимает от " + std::to_wstring(range[0]) + L" до " + std::to_wstring(range[1]) + L" параметра(ов)\n" };
+			throw std::wstring{ *name + LangLib::getTrans(L": Инструкция принимает от ") + std::to_wstring(range[0]) + LangLib::getTrans(L" до ") + std::to_wstring(range[1]) + LangLib::getTrans(L" параметра(ов)\n") };
 		}
 		break;
 	case VARIANTS: {
-		int size = (int)sizeof(variant) / (int)sizeof(int);
+		int sizeofvariants = static_cast<int>(sizeof(variant));
+		int size = sizeofvariants / static_cast<int>(sizeof(int));
 		bool is_variant = false;
 		for (int i = 0; i < size; ++i) {
 			if (count == variant[i]) {
@@ -78,12 +78,12 @@ void checkParameterCount(unsigned char type, int count, Machine* m, std::wstring
 					params_str += L", ";
 				}
 			}
-			throw std::wstring{ L"Инструкция " + *name + L" может принимать следующее число параметров: " + params_str + L"\n" };
+			throw std::wstring{ *name + LangLib::getTrans(L": Инструкция может принимать следующее число параметров: ") + params_str + LangLib::getTrans(L"\n") };
 		}
 	}
 				 break;
 	default:
-		throw std::wstring{ L"Указан неверный вариант валидации параметров" };
+		throw std::wstring{ LangLib::getTrans(L"Указан неверный вариант валидации параметров\n") };
 		break;
 	}
 }
@@ -94,7 +94,7 @@ void checkParameterCount(unsigned char type, int count, Machine* m, std::wstring
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void requiredVar(Var* val, Machine* m, std::wstring* type, std::wstring num) {
 	if ((*val).type != STR || (*val).getWStr()[0] != L'$') {
-		throw std::wstring{ num + L" параметр инструкции " + (*type) + L" должен быть именем переменной\n" };
+		throw std::wstring{ (*type) + LangLib::getTrans(L": ") + num + LangLib::getTrans(L" параметр инструкции должен быть именем переменной\n") };
 	}
 }
 
@@ -104,6 +104,6 @@ void requiredVar(Var* val, Machine* m, std::wstring* type, std::wstring num) {
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void requiredLabel(Var* val, Machine* m, std::wstring* type, std::wstring num) {
 	if ((*val).type != STR || (*val).getWStr()[0] != L'&') {
-		throw std::wstring{ num + L" параметр инструкции " + (*type) + L" должен быть именем метки\n" };
+		throw std::wstring{ (*type) + LangLib::getTrans(L": ") + num + LangLib::getTrans(L" параметр инструкции должен быть именем метки\n") };
 	}
 }

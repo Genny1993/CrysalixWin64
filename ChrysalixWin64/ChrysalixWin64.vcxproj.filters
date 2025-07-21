@@ -40,6 +40,12 @@
     <Filter Include="Исходные файлы\DynamicVariables">
       <UniqueIdentifier>{13070e5d-1617-46cf-a933-2b310b7d2124}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Исходные файлы\LangLib">
+      <UniqueIdentifier>{6434a7a3-685e-44d7-9879-4d652b28006d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы заголовков\LangLib">
+      <UniqueIdentifier>{f089f1ed-4204-44be-aaf0-0176c14dd6c7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ChrysalixWin64.cpp">
@@ -63,6 +69,9 @@
     <ClCompile Include="Var.cpp">
       <Filter>Исходные файлы\DynamicVariables</Filter>
     </ClCompile>
+    <ClCompile Include="LangLib.cpp">
+      <Filter>Исходные файлы\LangLib</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Instruction.h">
@@ -85,6 +94,9 @@
     </ClInclude>
     <ClInclude Include="Var.h">
       <Filter>Файлы заголовков\DynamicVariables</Filter>
+    </ClInclude>
+    <ClInclude Include="LangLib.h">
+      <Filter>Файлы заголовков\LangLib</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
