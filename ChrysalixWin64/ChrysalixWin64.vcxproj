@@ -159,7 +159,14 @@
     <ClInclude Include="Machine.h" />
     <ClInclude Include="Parser.h" />
     <ClInclude Include="Helpers.h" />
+    <ClInclude Include="resource.h" />
     <ClInclude Include="Var.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="ChrysalixWin64.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\crysalix64.ico" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
