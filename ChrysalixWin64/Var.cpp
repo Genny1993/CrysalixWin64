@@ -3,6 +3,7 @@
 #include <string>
 #include <iostream>
 #include <fstream>
+#include "LangLib.h"
 
 #include "Var.h"
 
@@ -119,7 +120,7 @@ long long int Var::getInt() const {
         return this->data.ntg;
     }
     else {
-        throw std::wstring{ L"Переменная не является знаковой целочисленной" };
+        throw std::wstring{ LangLib::getTrans(L"Переменная не является знаковой целочисленной\n") };
     }
 }
 
@@ -128,7 +129,7 @@ unsigned long long int Var::getUInt() const {
         return this->data.untg;
     }
     else {
-        throw std::wstring{ L"Переменная не является беззнаковой целочисленной" };
+        throw std::wstring{ LangLib::getTrans(L"Переменная не является беззнаковой целочисленной\n") };
     }
 }
 
@@ -137,7 +138,7 @@ long double Var::getDouble() const {
         return this->data.dbl;
     }
     else {
-        throw std::wstring{ L"Переменная не является числом с плавающей точкой" };
+        throw std::wstring{ LangLib::getTrans(L"Переменная не является числом с плавающей точкой\n") };
     }
 }
 
@@ -146,7 +147,7 @@ char Var::getChar() const {
         return this->data.chr;
     }
     else {
-        throw std::wstring{ L"Переменная не является символьной" };
+        throw std::wstring{ LangLib::getTrans(L"Переменная не является символьной\n") };
     }
 }
 
@@ -155,7 +156,7 @@ unsigned char Var::getUChar() const {
         return this->data.uchr;
     }
     else {
-        throw std::wstring{ L"Переменная не является беззнаковой символьной" };
+        throw std::wstring{ LangLib::getTrans(L"Переменная не является беззнаковой символьной\n") };
     }
 }
 
@@ -164,7 +165,7 @@ bool Var::getBool() const {
         return this->data.bln;
     }
     else {
-        throw std::wstring{ L"Переменная не является булевой" };
+        throw std::wstring{ LangLib::getTrans(L"Переменная не является булевой\n") };
     }
 }
 
@@ -173,7 +174,7 @@ std::wstring Var::getWStr() const {
         return this->str;
     }
     else {
-        throw std::wstring{ L"Переменная не является строкой" };
+        throw std::wstring{ LangLib::getTrans(L"Переменная не является строкой\n") };
     }
 }
 
@@ -182,7 +183,7 @@ std::vector<Var> Var::getArr() const {
         return this->arr;
     }
     else {
-        throw std::wstring{ L"Переменная не является массивом" };
+        throw std::wstring{ LangLib::getTrans(L"Переменная не является массивом\n") };
     }
 }
 
@@ -191,7 +192,7 @@ std::map<std::wstring, Var> Var::getMap() const {
         return this->mp;
     }
     else {
-        throw std::wstring{ L"Переменная не является словарем" };
+        throw std::wstring{ LangLib::getTrans(L"Переменная не является словарем\n") };
     }
 }
 
@@ -240,7 +241,9 @@ Var Var::toNTG() const {
         catch (std::exception& err)
         {
             std::string temp = err.what();
-            throw std::wstring{ L"Не удалось привести строку к типу NTG" };
+            std::wstring error = LangLib::getTrans(L"Не удалось привести строку к типу ");
+            error += L"NTG\n";
+            throw std::wstring{ error };
         }
     }
     else if (this->type == NIL) {
@@ -252,10 +255,14 @@ Var Var::toNTG() const {
         return result;
     }
     else if (this->type == ARR) {
-        throw std::wstring{ L"Невозможно привести массив к типу NTG" };
+        std::wstring error = LangLib::getTrans(L"Невозможно привести массив к типу ");
+        error += L"NTG\n";
+        throw std::wstring{ error };
     }
     else if (this->type == MAP) {
-        throw std::wstring{ L"Невозможно привести словарь к типу NTG" };
+        std::wstring error = LangLib::getTrans(L"Невозможно привести словарь к типу ");
+        error += L"NTG\n";
+        throw std::wstring{ error };
     }
     return Var();
 }
@@ -307,7 +314,9 @@ Var Var::toUNTG() const {
         catch (std::exception& err)
         {
             std::string temp = err.what();
-            throw std::wstring{ L"Не удалось привести строку к типу UNTG" };
+            std::wstring error = LangLib::getTrans(L"Не удалось привести строку к типу ");
+            error += L"UNTG\n";
+            throw std::wstring{ error };
         }
     }
     else if (this->type == NIL) {
@@ -319,10 +328,14 @@ Var Var::toUNTG() const {
         return result;
     }
     else if (this->type == ARR) {
-        throw std::wstring{ L"Невозможно привести массив к типу UNTG" };
+        std::wstring error = LangLib::getTrans(L"Невозможно привести массив к типу ");
+        error += L"UNTG\n";
+        throw std::wstring{ error };
     }
     else if (this->type == MAP) {
-        throw std::wstring{ L"Невозможно привести словарь к типу UNTG" };
+        std::wstring error = LangLib::getTrans(L"Невозможно привести словарь к типу ");
+        error += L"UNTG\n";
+        throw std::wstring{ error };
     }
     return Var();
 }
@@ -374,7 +387,9 @@ Var Var::toDBL() const {
         catch (std::exception& err)
         {
             std::string temp = err.what();
-            throw std::wstring{ L"Не удалось привести строку к типу DBL" };
+            std::wstring error = LangLib::getTrans(L"Не удалось привести строку к типу ");
+            error += L"DBL\n";
+            throw std::wstring{ error };
         }
     }
     else if (this->type == NIL) {
@@ -386,10 +401,14 @@ Var Var::toDBL() const {
         return result;
     }
     else if (this->type == ARR) {
-        throw std::wstring{ L"Невозможно привести массив к типу DBL" };
+        std::wstring error = LangLib::getTrans(L"Невозможно привести массив к типу ");
+        error += L"DBL\n";
+        throw std::wstring{ error };
     }
     else if (this->type == MAP) {
-        throw std::wstring{ L"Невозможно привести словарь к типу DBL" };
+        std::wstring error = LangLib::getTrans(L"Невозможно привести словарь к типу ");
+        error += L"DBL\n";
+        throw std::wstring{ error };
     }
     return Var();
 }
@@ -441,7 +460,9 @@ Var Var::toCHR() const {
         catch (std::exception& err)
         {
             std::string temp = err.what();
-            throw std::wstring{ L"Не удалось привести строку к типу CHR" };
+            std::wstring error = LangLib::getTrans(L"Не удалось привести строку к типу ");
+            error += L"CHR\n";
+            throw std::wstring{ error };
         }
     }
     else if (this->type == NIL) {
@@ -453,10 +474,14 @@ Var Var::toCHR() const {
         return result;
     }
     else if (this->type == ARR) {
-        throw std::wstring{ L"Невозможно привести массив к типу CHR" };
+        std::wstring error = LangLib::getTrans(L"Невозможно привести массив к типу ");
+        error += L"CHR\n";
+        throw std::wstring{ error };
     }
     else if (this->type == MAP) {
-        throw std::wstring{ L"Невозможно привести словарь к типу CHR" };
+        std::wstring error = LangLib::getTrans(L"Невозможно привести словарь к типу ");
+        error += L"CHR\n";
+        throw std::wstring{ error };
     }
 
     return Var();
@@ -509,7 +534,9 @@ Var Var::toUCHR() const {
         catch (std::exception& err)
         {
             std::string temp = err.what();
-            throw std::wstring{ L"Не удалось привести строку к типу UCHR" };
+            std::wstring error = LangLib::getTrans(L"Не удалось привести строку к типу ");
+            error += L"UCHR\n";
+            throw std::wstring{ error };
         }
     }
     else if (this->type == NIL) {
@@ -521,10 +548,15 @@ Var Var::toUCHR() const {
         return result;
     }
     else if (this->type == ARR) {
-        throw std::wstring{ L"Невозможно привести массив к типу UCHR" };
+        std::wstring error = LangLib::getTrans(L"Невозможно привести массив к типу ");
+        error += L"UCHR\n";
+        throw std::wstring{ error };
+
     }
     else if (this->type == MAP) {
-        throw std::wstring{ L"Невозможно привести словарь к типу UCHR" };
+        std::wstring error = LangLib::getTrans(L"Невозможно привести словарь к типу ");
+        error += L"UCHR\n";
+        throw std::wstring{ error };
     }
     return Var();
 }
@@ -705,7 +737,10 @@ Var Var::toSTR() const {
         }
     }
     else if (this->type == MAP) {
-        throw std::wstring{ L"Невозможно привести словарь к типу STR" };
+        //Сделать рекурсивный вывод как у ARR
+        std::wstring error = LangLib::getTrans(L"Невозможно привести словарь к типу ");
+        error += L"STR\n";
+        throw std::wstring{ error };
     }
     return Var();
 }
@@ -769,7 +804,9 @@ Var Var::toARR() const {
         return *this;
     }
     else if (this->type == MAP) {
-        throw std::wstring{ L"Невозможно привести словарь к типу ARR" };
+        std::wstring error = LangLib::getTrans(L"Невозможно привести словарь к типу ");
+        error += L"ARR\n";
+        throw std::wstring{ error };
     }
     return Var();
 }
@@ -877,7 +914,7 @@ Var& Var::operator[](int ind) {
         catch (std::exception& err)
         {
             std::string temp = err.what();
-            throw std::wstring{ L"Индекс находится вне диапазона" };
+            throw std::wstring{ LangLib::getTrans(L"Индекс находится вне диапазона\n") };
         }
     }
     else if (this->type == STR) {
@@ -889,11 +926,13 @@ Var& Var::operator[](int ind) {
         catch (std::exception& err)
         {
             std::string temp = err.what();
-            throw std::wstring{ L"Индекс находится вне диапазона" };
+            throw std::wstring{ LangLib::getTrans(L"Индекс находится вне диапазона\n") };
         }
     }
     else {
-        throw std::wstring{ L"Оператор [] используетя только для типов STR, ARR, MAP" };
+        std::wstring error = LangLib::getTrans(L"Взятие значения по индексу возможно только для следующих типов: ");
+        error += L"STR, ARR, MAP\n";
+        throw std::wstring{ error };
     }
 }
 Var& Var::operator[](const wchar_t* str) {
@@ -902,12 +941,14 @@ Var& Var::operator[](const wchar_t* str) {
             return this->mp.at(str);
         }
         else {
-            throw std::wstring{ L"Оператор [] используетя только для типов STR, ARR, MAP" };
+            std::wstring error = LangLib::getTrans(L"Взятие значения по индексу возможно только для следующих типов: ");
+            error += L"STR, ARR, MAP\n";
+            throw std::wstring{ error };
         }
     }
     catch (std::exception& err) {
         std::string temp = err.what();
-        throw std::wstring{ L"Индекс словаря не существует" };
+        throw std::wstring{ LangLib::getTrans(L"Индекс словаря не существует\n") };
     }
 }
 Var& Var::operator[](std::wstring str) {
@@ -916,12 +957,14 @@ Var& Var::operator[](std::wstring str) {
             return this->mp.at(str);
         }
         else {
-            throw std::wstring{ L"Оператор [] используетя только для типов STR, ARR, MAP" };
+            std::wstring error = LangLib::getTrans(L"Взятие значения по индексу возможно только для следующих типов: ");
+            error += L"STR, ARR, MAP\n";
+            throw std::wstring{ error };
         }
     }
     catch (std::exception& err) {
         std::string temp = err.what();
-        throw std::wstring{ L"Индекс словаря не существует" };
+        throw std::wstring{ LangLib::getTrans(L"Индекс словаря не существует\n") };
     }
 }
 Var& Var::operator[](Var v) {
@@ -933,7 +976,7 @@ Var& Var::operator[](Var v) {
             catch (std::exception& err)
             {
                 std::string temp = err.what();
-                throw std::wstring{ L"Индекс находится вне диапазона" };
+                throw std::wstring{ LangLib::getTrans(L"Индекс находится вне диапазона\n") };
             }
         }
         else if (this->type == STR) {
@@ -945,11 +988,13 @@ Var& Var::operator[](Var v) {
             catch (std::exception& err)
             {
                 std::string temp = err.what();
-                throw std::wstring{ L"Индекс находится вне диапазона" };
+                throw std::wstring{ LangLib::getTrans(L"Индекс находится вне диапазона\n") };
             }
         }
         else {
-            throw std::wstring{ L"Оператор [] используетя только для типов STR, ARR, MAP" };
+            std::wstring error = LangLib::getTrans(L"Взятие значения по индексу возможно только для следующих типов: ");
+            error += L"STR, ARR, MAP\n";
+            throw std::wstring{ error };
         }
     }
     else if (v.type == STR) {
@@ -958,16 +1003,20 @@ Var& Var::operator[](Var v) {
                 return this->mp.at(v.getWStr());
             } 
             else {
-                throw std::wstring{ L"Оператор [] используетя только для типов STR, ARR, MAP" };
+                std::wstring error = LangLib::getTrans(L"Взятие значения по индексу возможно только для следующих типов: ");
+                error += L"STR, ARR, MAP\n";
+                throw std::wstring{ error };
             }
         }
         catch (std::exception& err) {
             std::string temp = err.what();
-            throw std::wstring{ L"Индекс словаря не существует" };
+            throw std::wstring{ LangLib::getTrans(L"Индекс словаря не существует\n") };
         }
     }
     else {
-        throw std::wstring{ L"Оператор [] принимает только типы NTG, UNTG, STR" };
+        std::wstring error = LangLib::getTrans(L"Взятие значения по индексу использует только следующие типы: ");
+        error += L"NTG, UNTG, STR\n";
+        throw std::wstring{ error };
     }
     return v;
 }

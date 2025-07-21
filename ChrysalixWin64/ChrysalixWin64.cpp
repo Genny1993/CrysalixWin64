@@ -64,7 +64,7 @@ int main(int argc, char* argv[])
         std::wcout << LangLib::getTrans(L"Время выполнения кода: ") << std::to_wstring((double)elapsed_ms.count() / 1000000.0) << L" sec\n";
     }
     catch (const std::wstring& error_message) {
-        std::wcout << std::endl << error_message << std::endl;
+        std::wcout << std::endl << error_message;
         system("pause");
     }
     

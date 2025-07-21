@@ -17,7 +17,7 @@ void Machine::prepare() {
 			functions[this->instructions[i].opCode](this, &instructions[i], true, true);
 		}
 		catch (const std::wstring& error_message) {
-			throw std::wstring{ LangLib::getTrans(L"Ошибка выполнения инструкции ") + std::to_wstring(this->instruct_number + 1) + L" (" + this->instructions[i].as_string + L") " + error_message };
+			throw std::wstring{ LangLib::getTrans(L"Ошибка выполнения инструкции ") + std::to_wstring(this->instruct_number + 1) + L" (" + this->instructions[i].as_string + L"): " + error_message };
 		}
 	}
 	this->instruct_number = 0;
@@ -33,7 +33,7 @@ Var Machine::go() {
 			functions[this->instructions[this->instruct_number].opCode](this, &instructions[this->instruct_number], false, false);
 		}
 		catch (const std::wstring& error_message) {
-				throw std::wstring{ LangLib::getTrans(L"Ошибка выполнения инструкции ") + std::to_wstring(this->instruct_number + 1) + L" (" + this->instructions[this->instruct_number].as_string + L") " + error_message };
+				throw std::wstring{ LangLib::getTrans(L"Ошибка выполнения инструкции ") + std::to_wstring(this->instruct_number + 1) + L" (" + this->instructions[this->instruct_number].as_string + L"): " + error_message };
 		}
 	}
 	return this->ret_data;
