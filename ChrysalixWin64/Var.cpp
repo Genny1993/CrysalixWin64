@@ -4957,7 +4957,7 @@ Var drinall(Var a, Var b, std::vector<Var>* all_results, std::vector<Var> result
             }
             else {
                 result.push_back(Var(i));
-                result = srinall(arr[i], b, all_results, result).arr;
+                result = drinall(arr[i], b, all_results, result).arr;
                 int size = (int)result.size();
                 if (result[(long long int)size - 1].type == BLN && result[(long long int)size - 1].data.bln == true) {
                     (*all_results).push_back(Var(result));
