@@ -148,6 +148,7 @@
     </ClCompile>
     <ClCompile Include="CharsetHelper.cpp" />
     <ClCompile Include="LangLib.cpp" />
+    <ClCompile Include="InstructionFunctions.cpp" />
     <ClCompile Include="ValidateHelper.cpp" />
     <ClCompile Include="Var.cpp" />
   </ItemGroup>
