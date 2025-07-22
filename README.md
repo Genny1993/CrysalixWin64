@@ -10,11 +10,8 @@ It is minimalist, explicit, strict, and bare — every instruction performs one 
 - 🧱 Simple syntax: `INSTRUCTION: PARAM1, PARAM2, ...;`
 - 📦 Built-in array and dictionary support
 - 🧭 Recursive search (`rin`, `rinall`) and intersection (`intersect`)
-- 🧬 Machines (functions) and frames (objects)
-- 🧠 Runtime code generation
 - 🔄 Dynamic memory, typing, arithmetic, string ops
 - 🌍 Multi-language interpreter output (Russian, English)
-- 🪞 `JOKE` instruction — awakens the interpreter's "soul"
 
 ---
 
