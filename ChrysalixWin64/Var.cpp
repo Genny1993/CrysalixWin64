@@ -7,6 +7,16 @@
 
 #include "Var.h"
 
+const std::wstring MESSAGE1 = L"Не удалось привести строку к типу ";
+const std::wstring MESSAGE2 = L"Невозможно привести массив к типу ";
+const std::wstring MESSAGE3 = L"Невозможно привести словарь к типу ";
+const std::wstring MESSAGE4 = L"Индекс находится вне диапазона\n";
+const std::wstring MESSAGE5 = L"Взятие значения по индексу возможно только для следующих типов: ";
+const std::wstring MESSAGE6 = L"Индекс словаря не существует\n";
+const std::wstring MESSAGE7 = L"Инструкция используется только для следующих типов: ";
+const std::wstring MESSAGE8 = L"Массив не поддерживает данной операции\n";
+const std::wstring MESSAGE9 = L"Cловарь не поддерживает данной операции\n";
+
 Var::Var() {
     this->type = NIL;
 }
@@ -241,7 +251,7 @@ Var Var::toNTG() const {
         catch (std::exception& err)
         {
             std::string temp = err.what();
-            std::wstring error = LangLib::getTrans(L"Не удалось привести строку к типу ");
+            std::wstring error = LangLib::getTrans(MESSAGE1);
             error += L"NTG\n";
             throw std::wstring{ error };
         }
@@ -255,12 +265,12 @@ Var Var::toNTG() const {
         return result;
     }
     else if (this->type == ARR) {
-        std::wstring error = LangLib::getTrans(L"Невозможно привести массив к типу ");
+        std::wstring error = LangLib::getTrans(MESSAGE2);
         error += L"NTG\n";
         throw std::wstring{ error };
     }
     else if (this->type == MAP) {
-        std::wstring error = LangLib::getTrans(L"Невозможно привести словарь к типу ");
+        std::wstring error = LangLib::getTrans(MESSAGE3);
         error += L"NTG\n";
         throw std::wstring{ error };
     }
@@ -314,7 +324,7 @@ Var Var::toUNTG() const {
         catch (std::exception& err)
         {
             std::string temp = err.what();
-            std::wstring error = LangLib::getTrans(L"Не удалось привести строку к типу ");
+            std::wstring error = LangLib::getTrans(MESSAGE1);
             error += L"UNTG\n";
             throw std::wstring{ error };
         }
@@ -328,12 +338,12 @@ Var Var::toUNTG() const {
         return result;
     }
     else if (this->type == ARR) {
-        std::wstring error = LangLib::getTrans(L"Невозможно привести массив к типу ");
+        std::wstring error = LangLib::getTrans(MESSAGE2);
         error += L"UNTG\n";
         throw std::wstring{ error };
     }
     else if (this->type == MAP) {
-        std::wstring error = LangLib::getTrans(L"Невозможно привести словарь к типу ");
+        std::wstring error = LangLib::getTrans(MESSAGE3);
         error += L"UNTG\n";
         throw std::wstring{ error };
     }
@@ -387,7 +397,7 @@ Var Var::toDBL() const {
         catch (std::exception& err)
         {
             std::string temp = err.what();
-            std::wstring error = LangLib::getTrans(L"Не удалось привести строку к типу ");
+            std::wstring error = LangLib::getTrans(MESSAGE1);
             error += L"DBL\n";
             throw std::wstring{ error };
         }
@@ -401,12 +411,12 @@ Var Var::toDBL() const {
         return result;
     }
     else if (this->type == ARR) {
-        std::wstring error = LangLib::getTrans(L"Невозможно привести массив к типу ");
+        std::wstring error = LangLib::getTrans(MESSAGE2);
         error += L"DBL\n";
         throw std::wstring{ error };
     }
     else if (this->type == MAP) {
-        std::wstring error = LangLib::getTrans(L"Невозможно привести словарь к типу ");
+        std::wstring error = LangLib::getTrans(MESSAGE3);
         error += L"DBL\n";
         throw std::wstring{ error };
     }
@@ -460,7 +470,7 @@ Var Var::toCHR() const {
         catch (std::exception& err)
         {
             std::string temp = err.what();
-            std::wstring error = LangLib::getTrans(L"Не удалось привести строку к типу ");
+            std::wstring error = LangLib::getTrans(MESSAGE1);
             error += L"CHR\n";
             throw std::wstring{ error };
         }
@@ -474,12 +484,12 @@ Var Var::toCHR() const {
         return result;
     }
     else if (this->type == ARR) {
-        std::wstring error = LangLib::getTrans(L"Невозможно привести массив к типу ");
+        std::wstring error = LangLib::getTrans(MESSAGE2);
         error += L"CHR\n";
         throw std::wstring{ error };
     }
     else if (this->type == MAP) {
-        std::wstring error = LangLib::getTrans(L"Невозможно привести словарь к типу ");
+        std::wstring error = LangLib::getTrans(MESSAGE3);
         error += L"CHR\n";
         throw std::wstring{ error };
     }
@@ -534,7 +544,7 @@ Var Var::toUCHR() const {
         catch (std::exception& err)
         {
             std::string temp = err.what();
-            std::wstring error = LangLib::getTrans(L"Не удалось привести строку к типу ");
+            std::wstring error = LangLib::getTrans(MESSAGE1);
             error += L"UCHR\n";
             throw std::wstring{ error };
         }
@@ -548,13 +558,13 @@ Var Var::toUCHR() const {
         return result;
     }
     else if (this->type == ARR) {
-        std::wstring error = LangLib::getTrans(L"Невозможно привести массив к типу ");
+        std::wstring error = LangLib::getTrans(MESSAGE2);
         error += L"UCHR\n";
         throw std::wstring{ error };
 
     }
     else if (this->type == MAP) {
-        std::wstring error = LangLib::getTrans(L"Невозможно привести словарь к типу ");
+        std::wstring error = LangLib::getTrans(MESSAGE3);
         error += L"UCHR\n";
         throw std::wstring{ error };
     }
@@ -738,7 +748,7 @@ Var Var::toSTR() const {
     }
     else if (this->type == MAP) {
         //Сделать рекурсивный вывод как у ARR
-        std::wstring error = LangLib::getTrans(L"Невозможно привести словарь к типу ");
+        std::wstring error = LangLib::getTrans(MESSAGE3);
         error += L"STR\n";
         throw std::wstring{ error };
     }
@@ -804,7 +814,7 @@ Var Var::toARR() const {
         return *this;
     }
     else if (this->type == MAP) {
-        std::wstring error = LangLib::getTrans(L"Невозможно привести словарь к типу ");
+        std::wstring error = LangLib::getTrans(MESSAGE3);
         error += L"ARR\n";
         throw std::wstring{ error };
     }
@@ -914,7 +924,7 @@ Var& Var::operator[](int ind) {
         catch (std::exception& err)
         {
             std::string temp = err.what();
-            throw std::wstring{ LangLib::getTrans(L"Индекс находится вне диапазона\n") };
+            throw std::wstring{ LangLib::getTrans(MESSAGE4) };
         }
     }
     else if (this->type == STR) {
@@ -926,11 +936,11 @@ Var& Var::operator[](int ind) {
         catch (std::exception& err)
         {
             std::string temp = err.what();
-            throw std::wstring{ LangLib::getTrans(L"Индекс находится вне диапазона\n") };
+            throw std::wstring{ LangLib::getTrans(MESSAGE4) };
         }
     }
     else {
-        std::wstring error = LangLib::getTrans(L"Взятие значения по индексу возможно только для следующих типов: ");
+        std::wstring error = LangLib::getTrans(MESSAGE5);
         error += L"STR, ARR, MAP\n";
         throw std::wstring{ error };
     }
@@ -941,14 +951,14 @@ Var& Var::operator[](const wchar_t* str) {
             return this->mp.at(str);
         }
         else {
-            std::wstring error = LangLib::getTrans(L"Взятие значения по индексу возможно только для следующих типов: ");
+            std::wstring error = LangLib::getTrans(MESSAGE5);
             error += L"STR, ARR, MAP\n";
             throw std::wstring{ error };
         }
     }
     catch (std::exception& err) {
         std::string temp = err.what();
-        throw std::wstring{ LangLib::getTrans(L"Индекс словаря не существует\n") };
+        throw std::wstring{ LangLib::getTrans(MESSAGE6) };
     }
 }
 Var& Var::operator[](std::wstring str) {
@@ -957,14 +967,14 @@ Var& Var::operator[](std::wstring str) {
             return this->mp.at(str);
         }
         else {
-            std::wstring error = LangLib::getTrans(L"Взятие значения по индексу возможно только для следующих типов: ");
+            std::wstring error = LangLib::getTrans(MESSAGE5);
             error += L"STR, ARR, MAP\n";
             throw std::wstring{ error };
         }
     }
     catch (std::exception& err) {
         std::string temp = err.what();
-        throw std::wstring{ LangLib::getTrans(L"Индекс словаря не существует\n") };
+        throw std::wstring{ LangLib::getTrans(MESSAGE6) };
     }
 }
 Var& Var::operator[](Var v) {
@@ -976,7 +986,7 @@ Var& Var::operator[](Var v) {
             catch (std::exception& err)
             {
                 std::string temp = err.what();
-                throw std::wstring{ LangLib::getTrans(L"Индекс находится вне диапазона\n") };
+                throw std::wstring{ LangLib::getTrans(MESSAGE4) };
             }
         }
         else if (this->type == STR) {
@@ -988,11 +998,11 @@ Var& Var::operator[](Var v) {
             catch (std::exception& err)
             {
                 std::string temp = err.what();
-                throw std::wstring{ LangLib::getTrans(L"Индекс находится вне диапазона\n") };
+                throw std::wstring{ LangLib::getTrans(MESSAGE4) };
             }
         }
         else {
-            std::wstring error = LangLib::getTrans(L"Взятие значения по индексу возможно только для следующих типов: ");
+            std::wstring error = LangLib::getTrans(MESSAGE5);
             error += L"STR, ARR, MAP\n";
             throw std::wstring{ error };
         }
@@ -1003,14 +1013,14 @@ Var& Var::operator[](Var v) {
                 return this->mp.at(v.getWStr());
             } 
             else {
-                std::wstring error = LangLib::getTrans(L"Взятие значения по индексу возможно только для следующих типов: ");
+                std::wstring error = LangLib::getTrans(MESSAGE5);
                 error += L"STR, ARR, MAP\n";
                 throw std::wstring{ error };
             }
         }
         catch (std::exception& err) {
             std::string temp = err.what();
-            throw std::wstring{ LangLib::getTrans(L"Индекс словаря не существует\n") };
+            throw std::wstring{ LangLib::getTrans(MESSAGE6) };
         }
     }
     else {
@@ -1032,7 +1042,9 @@ Var Var::len() const {
         return Var(this->mp.size());
     }
     else {
-        throw std::wstring{ L"Метод len() используетя только для типов STR, ARR, MAP" };
+        std::wstring error = LangLib::getTrans(MESSAGE7);
+        error += L"STR, ARR, MAP\n";
+        throw std::wstring{ error };
     }
 }
 
@@ -1051,7 +1063,9 @@ Var Var::rev() const {
         return result;
     }
     else {
-        throw std::wstring{ L"Метод rev() используетя только для типов STR, ARR" };
+        std::wstring error = LangLib::getTrans(MESSAGE7);
+        error += L"STR, ARR\n";
+        throw std::wstring{ error };
     }
 }
 
@@ -1073,7 +1087,9 @@ Var Var::slice(int x, int y) {
         return res;
     }
     else {
-        throw std::wstring{ L"Метод slice() используетя только для типов STR, ARR" };
+        std::wstring error = LangLib::getTrans(MESSAGE7);
+        error += L"STR, ARR\n";
+        throw std::wstring{ error };
     }
 }
 Var Var::slice(Var x, Var y) {
@@ -1084,7 +1100,9 @@ Var Var::slice(Var x, Var y) {
         return this->slice((int)x.getInt(), (int)y.getInt());
     }
     else {
-        throw std::wstring{ L"Метод slice() используетя только для типов STR, ARR" };
+        std::wstring error = LangLib::getTrans(MESSAGE7);
+        error += L"STR, ARR\n";
+        throw std::wstring{ error };
     }
 }
 
@@ -1094,7 +1112,9 @@ Var Var::in(Var sent) const {
         return Var(exists);
     } 
     else {
-        throw std::wstring{ L"Метод in() используетя только для типа STR" };
+        std::wstring error = LangLib::getTrans(MESSAGE7);
+        error += L"STR\n";
+        throw std::wstring{ error };
     }
 }
 Var Var::in(const wchar_t* sent) const {
@@ -1103,7 +1123,9 @@ Var Var::in(const wchar_t* sent) const {
         return Var(exists);
     }
     else {
-        throw std::wstring{ L"Метод in() используетя только для типа STR" };
+        std::wstring error = LangLib::getTrans(MESSAGE7);
+        error += L"STR\n";
+        throw std::wstring{ error };
     }
 }
 Var Var::in(std::wstring sent) const {
@@ -1112,7 +1134,9 @@ Var Var::in(std::wstring sent) const {
         return Var(exists);
     }
     else {
-        throw std::wstring{ L"Метод in() используетя только для типа STR" };
+        std::wstring error = LangLib::getTrans(MESSAGE7);
+        error += L"STR\n";
+        throw std::wstring{ error };
     }
 }
 
@@ -1125,7 +1149,9 @@ Var Var::ltrim() const {
         return Var(str);
     }
     else {
-        throw std::wstring{ L"Метод ltrim() используетя только для типа STR" };
+        std::wstring error = LangLib::getTrans(MESSAGE7);
+        error += L"STR\n";
+        throw std::wstring{ error };
     }
 }
 Var Var::rtrim() const {
@@ -1135,7 +1161,9 @@ Var Var::rtrim() const {
         return Var(str);
     }
     else {
-        throw std::wstring{ L"Метод rtrim() используетя только для типа STR" };
+        std::wstring error = LangLib::getTrans(MESSAGE7);
+        error += L"STR\n";
+        throw std::wstring{ error };
     }
 }
 Var Var::trim() const {
@@ -1146,7 +1174,9 @@ Var Var::trim() const {
         return Var(str);
     }
     else {
-        throw std::wstring{ L"Метод trim() используетя только для типа STR" };
+        std::wstring error = LangLib::getTrans(MESSAGE7);
+        error += L"STR\n";
+        throw std::wstring{ error };
     }
 }
 
@@ -1161,7 +1191,9 @@ Var Var::repl(Var substr, Var newsubstr) const {
         return Var(s);
     }
     else {
-        throw std::wstring{ L"Метод repl() используетя только для типа STR" };
+        std::wstring error = LangLib::getTrans(MESSAGE7);
+        error += L"STR\n";
+        throw std::wstring{ error };
     }
 }
 Var Var::repl(const wchar_t* substr, const wchar_t* newsubstr) const {
@@ -1177,7 +1209,9 @@ Var Var::repl(const wchar_t* substr, const wchar_t* newsubstr) const {
         return Var(s);
     }
     else {
-        throw std::wstring{ L"Метод repl() используетя только для типа STR" };
+        std::wstring error = LangLib::getTrans(MESSAGE7);
+        error += L"STR\n";
+        throw std::wstring{ error };
     }
 }
 Var Var::repl(std::wstring substr, const std::wstring newsubstr) const {
@@ -1191,7 +1225,9 @@ Var Var::repl(std::wstring substr, const std::wstring newsubstr) const {
         return Var(s);
     }
     else {
-        throw std::wstring{ L"Метод repl() используетя только для типа STR" };
+        std::wstring error = LangLib::getTrans(MESSAGE7);
+        error += L"STR\n";
+        throw std::wstring{ error };
     }
 }
 
@@ -1223,7 +1259,9 @@ Var Var::split(Var delim) const {
         return result;
     }
     else {
-        throw std::wstring{ L"Метод split() используетя только для типа STR" };
+        std::wstring error = LangLib::getTrans(MESSAGE7);
+        error += L"STR\n";
+        throw std::wstring{ error };
     }
 }
 Var Var::split(std::wstring delim) const {
@@ -1245,7 +1283,9 @@ Var Var::join(Var delim) {
         return Var(str);
     }
     else {
-        throw std::wstring{ L"Метод join() используетя только для типа ARR" };
+        std::wstring error = LangLib::getTrans(MESSAGE7);
+        error += L"ARR\n";
+        throw std::wstring{ error };
     }
 }
 Var Var::join(std::wstring delim) {
@@ -1262,7 +1302,9 @@ Var Var::upper() const {
         return Var(str);
     }
     else {
-        throw std::wstring{ L"Метод upper() используетя только для типа STR" };
+        std::wstring error = LangLib::getTrans(MESSAGE7);
+        error += L"STR\n";
+        throw std::wstring{ error };
     }
 }
 
@@ -1273,7 +1315,9 @@ Var Var::lower() const {
         return Var(str);
     }
     else {
-        throw std::wstring{ L"Метод lower() используетя только для типа STR" };
+        std::wstring error = LangLib::getTrans(MESSAGE7);
+        error += L"STR\n";
+        throw std::wstring{ error };
     }
 }
 
@@ -1282,7 +1326,9 @@ void Var::pushb(Var v) {
         this->arr.push_back(v);
     }
     else {
-        throw std::wstring{ L"Метод PUSHB используетя только для типа ARR" };
+        std::wstring error = LangLib::getTrans(MESSAGE7);
+        error += L"ARR\n";
+        throw std::wstring{ error };
     }
 }
 
@@ -1294,7 +1340,9 @@ Var Var::popb() {
         return result;
     }
     else {
-        throw std::wstring{ L"Метод POPB используетя только для типа ARR" };
+        std::wstring error = LangLib::getTrans(MESSAGE7);
+        error += L"ARR\n";
+        throw std::wstring{ error };
     }
 }
 
@@ -1303,7 +1351,9 @@ void Var::pushf(Var val) {
         this->arr.insert(this->arr.begin(), val);
     }
     else {
-        throw std::wstring{ L"Метод PUSHF используетя только для типа ARR" };
+        std::wstring error = LangLib::getTrans(MESSAGE7);
+        error += L"ARR\n";
+        throw std::wstring{ error };
     }
 }
 
@@ -1315,7 +1365,9 @@ Var Var::popf() {
         return result;
     }
     else {
-        throw std::wstring{ L"Метод PUSHF используетя только для типа ARR" };
+        std::wstring error = LangLib::getTrans(MESSAGE7);
+        error += L"ARR\n";
+        throw std::wstring{ error };;
     }
 }
 
@@ -1327,7 +1379,9 @@ void Var::clear() {
         this->mp.clear();
     }
     else {
-        throw std::wstring{ L"Метод clear() используетя только для типов ARR, MAP" };
+        std::wstring error = LangLib::getTrans(MESSAGE7);
+        error += L"ARR, MAP\n";
+        throw std::wstring{ error };
     }
 
 }
@@ -1339,7 +1393,9 @@ void Var::erase(int x) {
         this->arr.erase(it);
     }
     else {
-        throw std::wstring{ L"Метод erase() используетя только для типа ARR" };
+        std::wstring error = LangLib::getTrans(MESSAGE7);
+        error += L"ARR\n";
+        throw std::wstring{ error };
     }
 }
 Var Var::erase(Var x) {
@@ -1351,16 +1407,24 @@ Var Var::erase(Var x) {
         }
         catch (std::out_of_range& ex) {
             std::string temp = ex.what();
-            throw std::wstring{ L"Индекс " + x.toSTR().getWStr() + L" не существует\n"};
+            throw std::wstring{ x.toSTR().getWStr() + LangLib::getTrans(L": ") + LangLib::getTrans(MESSAGE4) };
         }
     }
     else if (this->type == MAP) {
-        Var result = this->mp.at(x.toSTR().getWStr());
-        this->mp.erase(x.toSTR().getWStr());
-        return result;
+        try {
+            Var result = this->mp.at(x.toSTR().getWStr());
+            this->mp.erase(x.toSTR().getWStr());
+            return result;
+        }
+        catch (std::out_of_range& ex) {
+            std::string temp = ex.what();
+            throw std::wstring{ x.toSTR().getWStr() + LangLib::getTrans(L": ") + LangLib::getTrans(MESSAGE6) };
+        }
     }
     else {
-        throw std::wstring{ L"Метод erase() используетя только для типов ARR, MAP" };
+        std::wstring error = LangLib::getTrans(MESSAGE7);
+        error += L"ARR, MAP\n";
+        throw std::wstring{ error };
     }
 }
 void Var::erase(std::wstring x) {
@@ -1368,7 +1432,9 @@ void Var::erase(std::wstring x) {
         this->mp.erase(x);
     }
     else {
-        throw std::wstring{ L"Метод erase() используетя только для типа MAP" };
+        std::wstring error = LangLib::getTrans(MESSAGE7);
+        error += L"MAP\n";
+        throw std::wstring{ error };
     }
 }
 void Var::erase(const wchar_t* x) {
@@ -1376,19 +1442,23 @@ void Var::erase(const wchar_t* x) {
         this->mp.erase(x);
     }
     else {
-        throw std::wstring{ L"Метод erase() используетя только для типа MAP" };
+        std::wstring error = LangLib::getTrans(MESSAGE7);
+        error += L"MAP\n";
+        throw std::wstring{ error };
     }
 }
 
 void Var::insert_vector(Var x, Var val) {
     if (this->type == ARR) {
         if (x < 0 || x > arr.size()) {
-            throw std::wstring{ L"Индекс " + x.toSTR().getWStr() + L" не существует\n" };
+            throw std::wstring{ x.toSTR().getWStr() + LangLib::getTrans(L": ") + LangLib::getTrans(MESSAGE4) };
         }
         this->arr.insert(this->arr.begin() + x.toNTG().getInt(), val);
     }
     else {
-        throw std::wstring{ L"Метод insert() используетя только для типа ARR" };
+        std::wstring error = LangLib::getTrans(MESSAGE7);
+        error += L"ARR\n";
+        throw std::wstring{ error };
     }
 }
 
@@ -1397,7 +1467,9 @@ void Var::insert(Var str, Var val) {
         this->mp[str.getWStr()] = val;
     }
     else {
-        throw std::wstring{ L"Метод insert() используетя только для типа MAP" };
+        std::wstring error = LangLib::getTrans(MESSAGE7);
+        error += L"MAP\n";
+        throw std::wstring{ error };
     }
 }
 void Var::insert(std::wstring str, Var val) {
@@ -1405,7 +1477,9 @@ void Var::insert(std::wstring str, Var val) {
         this->mp[str] = val;
     }
     else {
-        throw std::wstring{ L"Метод insert() используетя только для типа MAP" };
+        std::wstring error = LangLib::getTrans(MESSAGE7);
+        error += L"MAP\n";
+        throw std::wstring{ error };
     }
 }
 void Var::insert(const wchar_t* str, Var val) {
@@ -1413,7 +1487,9 @@ void Var::insert(const wchar_t* str, Var val) {
         this->mp[str] = val;
     }
     else {
-        throw std::wstring{ L"Метод insert() используетя только для типа MAP" };
+        std::wstring error = LangLib::getTrans(MESSAGE7);
+        error += L"MAP\n";
+        throw std::wstring{ error };
     }
 }
 
@@ -1429,7 +1505,9 @@ Var Var::merge(Var val) const {
         return Var(result);
     } 
     else {
-        throw std::wstring{ L"Метод merge() используетя только для типа ARR, MAP" };
+        std::wstring error = LangLib::getTrans(MESSAGE7);
+        error += L"ARR, MAP\n";
+        throw std::wstring{ error };
     }
 }
 
@@ -1443,7 +1521,9 @@ Var Var::csize() const {
         return sz;
     }
     else {
-        throw std::wstring{ L"Метод csize() используетя только для типа ARR, MAP" };
+        std::wstring error = LangLib::getTrans(MESSAGE7);
+        error += L"ARR, MAP\n";
+        throw std::wstring{ error };
     }
 }
 
@@ -1856,10 +1936,10 @@ Var operator+(const Var& a, const Var& b)
             return result;
         }
         else if (b.type == ARR) {
-            throw std::wstring{ L"Массив не поддерживает данной операции" };
+            throw std::wstring{ LangLib::getTrans(MESSAGE8) };
         }
         else if (b.type == MAP) {
-            throw std::wstring{ L"Cловарь не поддерживает данной операции" };
+            throw std::wstring{ LangLib::getTrans(MESSAGE9) };
         }
         else {
             Var result;
@@ -1900,10 +1980,10 @@ Var operator+(const Var& a, const Var& b)
             return result;
         }
         else if (b.type == ARR) {
-            throw std::wstring{ L"Массив не поддерживает данной операции" };
+            throw std::wstring{ LangLib::getTrans(MESSAGE8) };
         }
         else if (b.type == MAP) {
-            throw std::wstring{ L"Cловарь не поддерживает данной операции" };
+            throw std::wstring{ LangLib::getTrans(MESSAGE9) };
         }
         else {
             Var result;
@@ -1944,10 +2024,10 @@ Var operator+(const Var& a, const Var& b)
             return result;
         }
         else if (b.type == ARR) {
-            throw std::wstring{ L"Массив не поддерживает данной операции" };
+            throw std::wstring{ LangLib::getTrans(MESSAGE8) };
         }
         else if (b.type == MAP) {
-            throw std::wstring{ L"Cловарь не поддерживает данной операции" };
+            throw std::wstring{ LangLib::getTrans(MESSAGE9) };
         }
         else {
             Var result;
@@ -1988,10 +2068,10 @@ Var operator+(const Var& a, const Var& b)
             return result;
         }
         else if (b.type == ARR) {
-            throw std::wstring{ L"Массив не поддерживает данной операции" };
+            throw std::wstring{ LangLib::getTrans(MESSAGE8) };
         }
         else if (b.type == MAP) {
-            throw std::wstring{ L"Cловарь не поддерживает данной операции" };
+            throw std::wstring{ LangLib::getTrans(MESSAGE9) };
         }
         else {
             Var result;
@@ -2032,10 +2112,10 @@ Var operator+(const Var& a, const Var& b)
             return result;
         }
         else if (b.type == ARR) {
-            throw std::wstring{ L"Массив не поддерживает данной операции" };
+            throw std::wstring{ LangLib::getTrans(MESSAGE8) };
         }
         else if (b.type == MAP) {
-            throw std::wstring{ L"Cловарь не поддерживает данной операции" };
+            throw std::wstring{ LangLib::getTrans(MESSAGE9) };
         }
         else {
             Var result;
@@ -2076,10 +2156,10 @@ Var operator+(const Var& a, const Var& b)
             return result;
         }
         else if (b.type == ARR) {
-            throw std::wstring{ L"Массив не поддерживает данной операции" };
+            throw std::wstring{ LangLib::getTrans(MESSAGE8) };
         }
         else if (b.type == MAP) {
-            throw std::wstring{ L"Cловарь не поддерживает данной операции" };
+            throw std::wstring{ LangLib::getTrans(MESSAGE9) };
         }
         else {
             Var result;
@@ -2121,10 +2201,10 @@ Var operator+(const Var& a, const Var& b)
             return result;
         }
         else if (b.type == ARR) {
-            throw std::wstring{ L"Массив не поддерживает данной операции" };
+            throw std::wstring{ LangLib::getTrans(MESSAGE8) };
         }
         else if (b.type == MAP) {
-            throw std::wstring{ L"Cловарь не поддерживает данной операции" };
+            throw std::wstring{ LangLib::getTrans(MESSAGE9) };
         }
         else {
             Var result;
@@ -2136,10 +2216,10 @@ Var operator+(const Var& a, const Var& b)
         return result;
     }
     else if (a.type == ARR) {
-        throw std::wstring{ L"Массив не поддерживает данной операции" };
+        throw std::wstring{ LangLib::getTrans(MESSAGE8) };
     }
     else if (a.type == MAP) {
-        throw std::wstring{ L"Cловарь не поддерживает данной операции" };
+        throw std::wstring{ LangLib::getTrans(MESSAGE9) };
     }
     else {
         Var result;
@@ -2184,10 +2264,10 @@ Var operator-(const Var& a, const Var& b)
             return result;
         }
         else if (b.type == ARR) {
-            throw std::wstring{ L"Массив не поддерживает данной операции" };
+            throw std::wstring{ LangLib::getTrans(MESSAGE8) };
         }
         else if (b.type == MAP) {
-            throw std::wstring{ L"Cловарь не поддерживает данной операции" };
+            throw std::wstring{ LangLib::getTrans(MESSAGE9) };
         }
         else {
             Var result;
@@ -2228,10 +2308,10 @@ Var operator-(const Var& a, const Var& b)
             return result;
         }
         else if (b.type == ARR) {
-            throw std::wstring{ L"Массив не поддерживает данной операции" };
+            throw std::wstring{ LangLib::getTrans(MESSAGE8) };
         }
         else if (b.type == MAP) {
-            throw std::wstring{ L"Cловарь не поддерживает данной операции" };
+            throw std::wstring{ LangLib::getTrans(MESSAGE9) };
         }
         else {
             Var result;
@@ -2272,10 +2352,10 @@ Var operator-(const Var& a, const Var& b)
             return result;
         }
         else if (b.type == ARR) {
-            throw std::wstring{ L"Массив не поддерживает данной операции" };
+            throw std::wstring{ LangLib::getTrans(MESSAGE8) };
         }
         else if (b.type == MAP) {
-            throw std::wstring{ L"Cловарь не поддерживает данной операции" };
+            throw std::wstring{ LangLib::getTrans(MESSAGE9) };
         }
         else {
             Var result;
@@ -2316,10 +2396,10 @@ Var operator-(const Var& a, const Var& b)
             return result;
         }
         else if (b.type == ARR) {
-            throw std::wstring{ L"Массив не поддерживает данной операции" };
+            throw std::wstring{ LangLib::getTrans(MESSAGE8) };
         }
         else if (b.type == MAP) {
-            throw std::wstring{ L"Cловарь не поддерживает данной операции" };
+            throw std::wstring{ LangLib::getTrans(MESSAGE9) };
         }
         else {
             Var result;
@@ -2360,10 +2440,10 @@ Var operator-(const Var& a, const Var& b)
             return result;
         }
         else if (b.type == ARR) {
-            throw std::wstring{ L"Массив не поддерживает данной операции" };
+            throw std::wstring{ LangLib::getTrans(MESSAGE8) };
         }
         else if (b.type == MAP) {
-            throw std::wstring{ L"Cловарь не поддерживает данной операции" };
+            throw std::wstring{ LangLib::getTrans(MESSAGE9) };
         }
         else {
             Var result;
@@ -2404,10 +2484,10 @@ Var operator-(const Var& a, const Var& b)
             return result;
         }
         else if (b.type == ARR) {
-            throw std::wstring{ L"Массив не поддерживает данной операции" };
+            throw std::wstring{ LangLib::getTrans(MESSAGE8) };
         }
         else if (b.type == MAP) {
-            throw std::wstring{ L"Cловарь не поддерживает данной операции" };
+            throw std::wstring{ LangLib::getTrans(MESSAGE9) };
         }
         else {
             Var result;
@@ -2449,10 +2529,10 @@ Var operator-(const Var& a, const Var& b)
             return result;
         }
         else if (b.type == ARR) {
-            throw std::wstring{ L"Массив не поддерживает данной операции" };
+            throw std::wstring{ LangLib::getTrans(MESSAGE8) };
         }
         else if (b.type == MAP) {
-            throw std::wstring{ L"Cловарь не поддерживает данной операции" };
+            throw std::wstring{ LangLib::getTrans(MESSAGE9) };
         }
         else {
             Var result;
@@ -2464,10 +2544,10 @@ Var operator-(const Var& a, const Var& b)
         return result;
     }
     else if (a.type == ARR) {
-        throw std::wstring{ L"Массив не поддерживает данной операции" };
+        throw std::wstring{ LangLib::getTrans(MESSAGE8) };
     }
     else if (a.type == MAP) {
-        throw std::wstring{ L"Cловарь не поддерживает данной операции" };
+        throw std::wstring{ LangLib::getTrans(MESSAGE9) };
     }
     else {
         Var result;
@@ -2511,10 +2591,10 @@ Var operator*(const Var& a, const Var& b)
             return result;
         }
         else if (b.type == ARR) {
-            throw std::wstring{ L"Массив не поддерживает данной операции" };
+            throw std::wstring{ LangLib::getTrans(MESSAGE8) };
         }
         else if (b.type == MAP) {
-            throw std::wstring{ L"Cловарь не поддерживает данной операции" };
+            throw std::wstring{ LangLib::getTrans(MESSAGE9) };
         }
         else {
             Var result;
@@ -2555,10 +2635,10 @@ Var operator*(const Var& a, const Var& b)
             return result;
         }
         else if (b.type == ARR) {
-            throw std::wstring{ L"Массив не поддерживает данной операции" };
+            throw std::wstring{ LangLib::getTrans(MESSAGE8) };
         }
         else if (b.type == MAP) {
-            throw std::wstring{ L"Cловарь не поддерживает данной операции" };
+            throw std::wstring{ LangLib::getTrans(MESSAGE9) };
         }
         else {
             Var result;
@@ -2599,10 +2679,10 @@ Var operator*(const Var& a, const Var& b)
             return result;
         }
         else if (b.type == ARR) {
-            throw std::wstring{ L"Массив не поддерживает данной операции" };
+            throw std::wstring{ LangLib::getTrans(MESSAGE8) };
         }
         else if (b.type == MAP) {
-            throw std::wstring{ L"Cловарь не поддерживает данной операции" };
+            throw std::wstring{ LangLib::getTrans(MESSAGE9) };
         }
         else {
             Var result;
@@ -2643,10 +2723,10 @@ Var operator*(const Var& a, const Var& b)
             return result;
         }
         else if (b.type == ARR) {
-            throw std::wstring{ L"Массив не поддерживает данной операции" };
+            throw std::wstring{ LangLib::getTrans(MESSAGE8) };
         }
         else if (b.type == MAP) {
-            throw std::wstring{ L"Cловарь не поддерживает данной операции" };
+            throw std::wstring{ LangLib::getTrans(MESSAGE9) };
         }
         else {
             Var result;
@@ -2687,10 +2767,10 @@ Var operator*(const Var& a, const Var& b)
             return result;
         }
         else if (b.type == ARR) {
-            throw std::wstring{ L"Массив не поддерживает данной операции" };
+            throw std::wstring{ LangLib::getTrans(MESSAGE8) };
         }
         else if (b.type == MAP) {
-            throw std::wstring{ L"Cловарь не поддерживает данной операции" };
+            throw std::wstring{ LangLib::getTrans(MESSAGE9) };
         }
         else {
             Var result;
@@ -2731,10 +2811,10 @@ Var operator*(const Var& a, const Var& b)
             return result;
         }
         else if (b.type == ARR) {
-            throw std::wstring{ L"Массив не поддерживает данной операции" };
+            throw std::wstring{ LangLib::getTrans(MESSAGE8) };
         }
         else if (b.type == MAP) {
-            throw std::wstring{ L"Cловарь не поддерживает данной операции" };
+            throw std::wstring{ LangLib::getTrans(MESSAGE9) };
         }
         else {
             Var result;
@@ -2776,10 +2856,10 @@ Var operator*(const Var& a, const Var& b)
             return result;
         }
         else if (b.type == ARR) {
-            throw std::wstring{ L"Массив не поддерживает данной операции" };
+            throw std::wstring{ LangLib::getTrans(MESSAGE8) };
         }
         else if (b.type == MAP) {
-            throw std::wstring{ L"Cловарь не поддерживает данной операции" };
+            throw std::wstring{ LangLib::getTrans(MESSAGE9) };
         }
         else {
             Var result;
@@ -2791,10 +2871,10 @@ Var operator*(const Var& a, const Var& b)
         return result;
     }
     else if (a.type == ARR) {
-        throw std::wstring{ L"Массив не поддерживает данной операции" };
+        throw std::wstring{ LangLib::getTrans(MESSAGE8) };
     }
     else if (a.type == MAP) {
-        throw std::wstring{ L"Cловарь не поддерживает данной операции" };
+        throw std::wstring{ LangLib::getTrans(MESSAGE9) };
     }
     else {
         Var result;
@@ -2838,10 +2918,10 @@ Var operator/(const Var& a, const Var& b)
             return result;
         }
         else if (b.type == ARR) {
-            throw std::wstring{ L"Массив не поддерживает данной операции" };
+            throw std::wstring{ LangLib::getTrans(MESSAGE8) };
         }
         else if (b.type == MAP) {
-            throw std::wstring{ L"Cловарь не поддерживает данной операции" };
+            throw std::wstring{ LangLib::getTrans(MESSAGE9) };
         }
         else {
             Var result;
@@ -2882,10 +2962,10 @@ Var operator/(const Var& a, const Var& b)
             return result;
         }
         else if (b.type == ARR) {
-            throw std::wstring{ L"Массив не поддерживает данной операции" };
+            throw std::wstring{ LangLib::getTrans(MESSAGE8) };
         }
         else if (b.type == MAP) {
-            throw std::wstring{ L"Cловарь не поддерживает данной операции" };
+            throw std::wstring{ LangLib::getTrans(MESSAGE9) };
         }
         else {
             Var result;
@@ -2926,10 +3006,10 @@ Var operator/(const Var& a, const Var& b)
             return result;
         }
         else if (b.type == ARR) {
-            throw std::wstring{ L"Массив не поддерживает данной операции" };
+            throw std::wstring{ LangLib::getTrans(MESSAGE8) };
         }
         else if (b.type == MAP) {
-            throw std::wstring{ L"Cловарь не поддерживает данной операции" };
+            throw std::wstring{ LangLib::getTrans(MESSAGE9) };
         }
         else {
             Var result;
@@ -2970,10 +3050,10 @@ Var operator/(const Var& a, const Var& b)
             return result;
         }
         else if (b.type == ARR) {
-            throw std::wstring{ L"Массив не поддерживает данной операции" };
+            throw std::wstring{ LangLib::getTrans(MESSAGE8) };
         }
         else if (b.type == MAP) {
-            throw std::wstring{ L"Cловарь не поддерживает данной операции" };
+            throw std::wstring{ LangLib::getTrans(MESSAGE9) };
         }
         else {
             Var result;
@@ -3014,10 +3094,10 @@ Var operator/(const Var& a, const Var& b)
             return result;
         }
         else if (b.type == ARR) {
-            throw std::wstring{ L"Массив не поддерживает данной операции" };
+            throw std::wstring{ LangLib::getTrans(MESSAGE8) };
         }
         else if (b.type == MAP) {
-            throw std::wstring{ L"Cловарь не поддерживает данной операции" };
+            throw std::wstring{ LangLib::getTrans(MESSAGE9) };
         }
         else {
             Var result;
@@ -3058,10 +3138,10 @@ Var operator/(const Var& a, const Var& b)
             return result;
         }
         else if (b.type == ARR) {
-            throw std::wstring{ L"Массив не поддерживает данной операции" };
+            throw std::wstring{ LangLib::getTrans(MESSAGE8) };
         }
         else if (b.type == MAP) {
-            throw std::wstring{ L"Cловарь не поддерживает данной операции" };
+            throw std::wstring{ LangLib::getTrans(MESSAGE9) };
         }
         else {
             Var result;
@@ -3103,10 +3183,10 @@ Var operator/(const Var& a, const Var& b)
             return result;
         }
         else if (b.type == ARR) {
-            throw std::wstring{ L"Массив не поддерживает данной операции" };
+            throw std::wstring{ LangLib::getTrans(MESSAGE8) };
         }
         else if (b.type == MAP) {
-            throw std::wstring{ L"Cловарь не поддерживает данной операции" };
+            throw std::wstring{ LangLib::getTrans(MESSAGE9) };
         }
         else {
             Var result;
@@ -3118,10 +3198,10 @@ Var operator/(const Var& a, const Var& b)
         return result;
     }
     else if (a.type == ARR) {
-        throw std::wstring{ L"Массив не поддерживает данной операции" };
+        throw std::wstring{ LangLib::getTrans(MESSAGE8) };
     }
     else if (a.type == MAP) {
-        throw std::wstring{ L"Cловарь не поддерживает данной операции" };
+        throw std::wstring{ LangLib::getTrans(MESSAGE9) };
     }
     else {
         Var result;
@@ -3165,10 +3245,10 @@ Var operator%(const Var& a, const Var& b)
             return result;
         }
         else if (b.type == ARR) {
-            throw std::wstring{ L"Массив не поддерживает данной операции" };
+            throw std::wstring{ LangLib::getTrans(MESSAGE8) };
         }
         else if (b.type == MAP) {
-            throw std::wstring{ L"Cловарь не поддерживает данной операции" };
+            throw std::wstring{ LangLib::getTrans(MESSAGE9) };
         }
         else {
             Var result;
@@ -3209,10 +3289,10 @@ Var operator%(const Var& a, const Var& b)
             return result;
         }
         else if (b.type == ARR) {
-            throw std::wstring{ L"Массив не поддерживает данной операции" };
+            throw std::wstring{ LangLib::getTrans(MESSAGE8) };
         }
         else if (b.type == MAP) {
-            throw std::wstring{ L"Cловарь не поддерживает данной операции" };
+            throw std::wstring{ LangLib::getTrans(MESSAGE9) };
         }
         else {
             Var result;
@@ -3253,10 +3333,10 @@ Var operator%(const Var& a, const Var& b)
             return result;
         }
         else if (b.type == ARR) {
-            throw std::wstring{ L"Массив не поддерживает данной операции" };
+            throw std::wstring{ LangLib::getTrans(MESSAGE8) };
         }
         else if (b.type == MAP) {
-            throw std::wstring{ L"Cловарь не поддерживает данной операции" };
+            throw std::wstring{ LangLib::getTrans(MESSAGE9) };
         }
         else {
             Var result;
@@ -3297,10 +3377,10 @@ Var operator%(const Var& a, const Var& b)
             return result;
         }
         else if (b.type == ARR) {
-            throw std::wstring{ L"Массив не поддерживает данной операции" };
+            throw std::wstring{ LangLib::getTrans(MESSAGE8) };
         }
         else if (b.type == MAP) {
-            throw std::wstring{ L"Cловарь не поддерживает данной операции" };
+            throw std::wstring{ LangLib::getTrans(MESSAGE9) };
         }
         else {
             Var result;
@@ -3341,10 +3421,10 @@ Var operator%(const Var& a, const Var& b)
             return result;
         }
         else if (b.type == ARR) {
-            throw std::wstring{ L"Массив не поддерживает данной операции" };
+            throw std::wstring{ LangLib::getTrans(MESSAGE8) };
         }
         else if (b.type == MAP) {
-            throw std::wstring{ L"Cловарь не поддерживает данной операции" };
+            throw std::wstring{ LangLib::getTrans(MESSAGE9) };
         }
         else {
             Var result;
@@ -3385,10 +3465,10 @@ Var operator%(const Var& a, const Var& b)
             return result;
         }
         else if (b.type == ARR) {
-            throw std::wstring{ L"Массив не поддерживает данной операции" };
+            throw std::wstring{ LangLib::getTrans(MESSAGE8) };
         }
         else if (b.type == MAP) {
-            throw std::wstring{ L"Cловарь не поддерживает данной операции" };
+            throw std::wstring{ LangLib::getTrans(MESSAGE9) };
         }
         else {
             Var result;
@@ -3430,10 +3510,10 @@ Var operator%(const Var& a, const Var& b)
             return result;
         }
         else if (b.type == ARR) {
-            throw std::wstring{ L"Массив не поддерживает данной операции" };
+            throw std::wstring{ LangLib::getTrans(MESSAGE8) };
         }
         else if (b.type == MAP) {
-            throw std::wstring{ L"Cловарь не поддерживает данной операции" };
+            throw std::wstring{ LangLib::getTrans(MESSAGE9) };
         }
         else {
             Var result;
@@ -3445,10 +3525,10 @@ Var operator%(const Var& a, const Var& b)
         return result;
     }
     else if (a.type == ARR) {
-        throw std::wstring{ L"Массив не поддерживает данной операции" };
+        throw std::wstring{ LangLib::getTrans(MESSAGE8) };
     }
     else if (a.type == MAP) {
-        throw std::wstring{ L"Cловарь не поддерживает данной операции" };
+        throw std::wstring{ LangLib::getTrans(MESSAGE9) };
     }
     else {
         Var result;
@@ -3523,7 +3603,7 @@ bool operator==(const Var& a, const Var& b) {
             return false;
         }
         else if (b.type == MAP) {
-            throw std::wstring{ L"Cловарь не поддерживает данной операции" };
+            throw std::wstring{ LangLib::getTrans(MESSAGE9) };
         }
         else {
             return false;
@@ -3570,7 +3650,7 @@ bool operator==(const Var& a, const Var& b) {
             return false;
         }
         else if (b.type == MAP) {
-            throw std::wstring{ L"Cловарь не поддерживает данной операции" };
+            throw std::wstring{ LangLib::getTrans(MESSAGE9) };
         }
         else {
             return false;
@@ -3617,7 +3697,7 @@ bool operator==(const Var& a, const Var& b) {
             return false;
         }
         else if (b.type == MAP) {
-            throw std::wstring{ L"Cловарь не поддерживает данной операции" };
+            throw std::wstring{ LangLib::getTrans(MESSAGE9) };
         }
         else {
             return false;
@@ -3664,7 +3744,7 @@ bool operator==(const Var& a, const Var& b) {
             return false;
         }
         else if (b.type == MAP) {
-            throw std::wstring{ L"Cловарь не поддерживает данной операции" };
+            throw std::wstring{ LangLib::getTrans(MESSAGE9) };
         }
         else {
             return false;
@@ -3711,7 +3791,7 @@ bool operator==(const Var& a, const Var& b) {
             return false;
         }
         else if (b.type == MAP) {
-            throw std::wstring{ L"Cловарь не поддерживает данной операции" };
+            throw std::wstring{ LangLib::getTrans(MESSAGE9) };
         }
         else {
             return false;
@@ -3758,7 +3838,7 @@ bool operator==(const Var& a, const Var& b) {
             return false;
         }
         else if (b.type == MAP) {
-            throw std::wstring{ L"Cловарь не поддерживает данной операции" };
+            throw std::wstring{ LangLib::getTrans(MESSAGE9) };
         }
         else {
             return false;
@@ -3835,7 +3915,7 @@ bool operator==(const Var& a, const Var& b) {
             return false;
         }
         else if (b.type == MAP) {
-            throw std::wstring{ L"Cловарь не поддерживает данной операции" };
+            throw std::wstring{ LangLib::getTrans(MESSAGE9) };
         }
         else {
             return false;
@@ -3873,7 +3953,7 @@ bool operator==(const Var& a, const Var& b) {
             return false;
         }
         else if (b.type == MAP) {
-            throw std::wstring{ L"Cловарь не поддерживает данной операции" };
+            throw std::wstring{ LangLib::getTrans(MESSAGE9) };
         }
         else {
             return false;
@@ -3906,7 +3986,7 @@ bool operator==(const Var& a, const Var& b) {
         }
     }
     else if (a.type == MAP) {
-        throw std::wstring{ L"Cловарь не поддерживает данной операции" };
+        throw std::wstring{ LangLib::getTrans(MESSAGE9) };
     }
     else {
         return false;
@@ -3953,7 +4033,7 @@ bool operator>(const Var& a, const Var& b) {
             return false;
         }
         else if (b.type == MAP) {
-            throw std::wstring{ L"Cловарь не поддерживает данной операции" };
+            throw std::wstring{ LangLib::getTrans(MESSAGE9) };
         }
         else {
             return false;
@@ -3994,7 +4074,7 @@ bool operator>(const Var& a, const Var& b) {
             return false;
         }
         else if (b.type == MAP) {
-            throw std::wstring{ L"Cловарь не поддерживает данной операции" };
+            throw std::wstring{ LangLib::getTrans(MESSAGE9) };
         }
         else {
             return false;
@@ -4035,7 +4115,7 @@ bool operator>(const Var& a, const Var& b) {
             return false;
         }
         else if (b.type == MAP) {
-            throw std::wstring{ L"Cловарь не поддерживает данной операции" };
+            throw std::wstring{ LangLib::getTrans(MESSAGE9) };
         }
         else {
             return false;
@@ -4076,7 +4156,7 @@ bool operator>(const Var& a, const Var& b) {
             return false;
         }
         else if (b.type == MAP) {
-            throw std::wstring{ L"Cловарь не поддерживает данной операции" };
+            throw std::wstring{ LangLib::getTrans(MESSAGE9) };
         }
         else {
             return false;
@@ -4117,7 +4197,7 @@ bool operator>(const Var& a, const Var& b) {
             return false;
         }
         else if (b.type == MAP) {
-            throw std::wstring{ L"Cловарь не поддерживает данной операции" };
+            throw std::wstring{ LangLib::getTrans(MESSAGE9) };
         }
         else {
             return false;
@@ -4158,7 +4238,7 @@ bool operator>(const Var& a, const Var& b) {
             return false;
         }
         else if (b.type == MAP) {
-            throw std::wstring{ L"Cловарь не поддерживает данной операции" };
+            throw std::wstring{ LangLib::getTrans(MESSAGE9) };
         }
         else {
             return false;
@@ -4229,7 +4309,7 @@ bool operator>(const Var& a, const Var& b) {
             return false;
         }
         else if (b.type == MAP) {
-            throw std::wstring{ L"Cловарь не поддерживает данной операции" };
+            throw std::wstring{ LangLib::getTrans(MESSAGE9) };
         }
         else {
             return false;
@@ -4264,7 +4344,7 @@ bool operator>(const Var& a, const Var& b) {
             return false;
         }
         else if (b.type == MAP) {
-            throw std::wstring{ L"Cловарь не поддерживает данной операции" };
+            throw std::wstring{ LangLib::getTrans(MESSAGE9) };
         }
         else {
             return false;
@@ -4275,14 +4355,14 @@ bool operator>(const Var& a, const Var& b) {
             return a.getArr().size() > b.getArr().size();
         }
         else if (b.type == MAP) {
-            throw std::wstring{ L"Cловарь не поддерживает данной операции" };
+            throw std::wstring{ LangLib::getTrans(MESSAGE9) };
         }
         else {
             return true;
         }
     }
     else if (a.type == MAP) {
-        throw std::wstring{ L"Cловарь не поддерживает данной операции" };
+        throw std::wstring{ LangLib::getTrans(MESSAGE9) };
     }
     else {
         return false;
@@ -4329,7 +4409,7 @@ bool operator<(const Var& a, const Var& b) {
             return true;
         }
         else if (b.type == MAP) {
-            throw std::wstring{ L"Cловарь не поддерживает данной операции" };
+            throw std::wstring{ LangLib::getTrans(MESSAGE9) };
         }
         else {
             return false;
@@ -4370,7 +4450,7 @@ bool operator<(const Var& a, const Var& b) {
             return true;
         }
         else if (b.type == MAP) {
-            throw std::wstring{ L"Cловарь не поддерживает данной операции" };
+            throw std::wstring{ LangLib::getTrans(MESSAGE9) };
         }
         else {
             return false;
@@ -4411,7 +4491,7 @@ bool operator<(const Var& a, const Var& b) {
             return true;
         }
         else if (b.type == MAP) {
-            throw std::wstring{ L"Cловарь не поддерживает данной операции" };
+            throw std::wstring{ LangLib::getTrans(MESSAGE9) };
         }
         else {
             return false;
@@ -4452,7 +4532,7 @@ bool operator<(const Var& a, const Var& b) {
             return true;
         }
         else if (b.type == MAP) {
-            throw std::wstring{ L"Cловарь не поддерживает данной операции" };
+            throw std::wstring{ LangLib::getTrans(MESSAGE9) };
         }
         else {
             return false;
@@ -4493,7 +4573,7 @@ bool operator<(const Var& a, const Var& b) {
             return true;
         }
         else if (b.type == MAP) {
-            throw std::wstring{ L"Cловарь не поддерживает данной операции" };
+            throw std::wstring{ LangLib::getTrans(MESSAGE9) };
         }
         else {
             return false;
@@ -4534,7 +4614,7 @@ bool operator<(const Var& a, const Var& b) {
             return true;
         }
         else if (b.type == MAP) {
-            throw std::wstring{ L"Cловарь не поддерживает данной операции" };
+            throw std::wstring{ LangLib::getTrans(MESSAGE9) };
         }
         else {
             return false;
@@ -4605,7 +4685,7 @@ bool operator<(const Var& a, const Var& b) {
             return true;
         }
         else if (b.type == MAP) {
-            throw std::wstring{ L"Cловарь не поддерживает данной операции" };
+            throw std::wstring{ LangLib::getTrans(MESSAGE9) };
         }
         else {
             return false;
@@ -4640,7 +4720,7 @@ bool operator<(const Var& a, const Var& b) {
             return true;
         }
         else if (b.type == MAP) {
-            throw std::wstring{ L"Cловарь не поддерживает данной операции" };
+            throw std::wstring{ LangLib::getTrans(MESSAGE9) };
         }
         else {
             return false;
@@ -4651,14 +4731,14 @@ bool operator<(const Var& a, const Var& b) {
             return a.getArr().size() < b.getArr().size();
         }
         else if (b.type == MAP) {
-            throw std::wstring{ L"Cловарь не поддерживает данной операции" };
+            throw std::wstring{ LangLib::getTrans(MESSAGE9) };
         }
         else {
             return false;
         }
     }
     else if (a.type == MAP) {
-        throw std::wstring{ L"Cловарь не поддерживает данной операции" };
+        throw std::wstring{ LangLib::getTrans(MESSAGE9) };
     }
     else {
         return false;

@@ -25,7 +25,7 @@ int main(int argc, char* argv[])
         }
         catch (const std::wstring& error_message) {
             std::wstring temp = error_message;
-            std::wcout << L"0.2.3 alpha";
+            std::wcout << L"0.2.4 alpha";
             return 0;
         }
     }
